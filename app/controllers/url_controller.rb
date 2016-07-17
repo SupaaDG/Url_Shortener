@@ -1,5 +1,5 @@
 class UrlController < ApplicationController
-
+@@exists = nil
   def home
 
   end
@@ -9,6 +9,9 @@ class UrlController < ApplicationController
     @url = Url.new(full: params[:entry], short: @rand)
       if @url.save
         pointless_var = 0
+      elsif Url.find_by_full(params[:entry]) != nil
+        @@exists = Url.find_by_full(params[:entry])
+        redirect_to alreadyshort_path
       else
         redirect_to oops_path
       end
@@ -20,6 +23,11 @@ class UrlController < ApplicationController
 
   def shortened
     redirect_to Url.find_by_short(params[:id]).full
+  end
+
+  def alreadyshort
+    @itsshort = @@exists.short
+    @thisurl = @@exists.full
   end
 
 end
