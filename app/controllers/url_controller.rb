@@ -6,11 +6,11 @@ class UrlController < ApplicationController
 
   def dealwith
     @rand = (0...4).map { (65 + rand(26)).chr }.join
-    @url = Url.new(full: params[:entry], short: @rand)
+    @url = Url.new(full: "#{params[:entry]}", short: @rand)
       if @url.save
         pointless_var = 0
-      elsif Url.find_by_full(params[:entry]) != nil
-        @@exists = Url.find_by_full(params[:entry])
+      elsif Url.find_by_full(params[:entry].to_s) != nil
+        @@exists = Url.find_by_full("#{params[:entry]}")
         redirect_to alreadyshort_path
       else
         redirect_to oops_path
@@ -18,11 +18,11 @@ class UrlController < ApplicationController
   end
 
   def invalid
-
   end
 
   def shortened
-    redirect_to Url.find_by_short(params[:id]).full
+    @urlrecord = Url.find_by_short(params[:id].to_s).full
+    redirect_to @urlrecord
   end
 
   def alreadyshort
