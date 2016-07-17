@@ -1,0 +1,9 @@
+<h1>Url Shortener</h1>
+<p>Enter a full url and you will recieve a short key that you can add to end of this url to redirect you to the original url. You can also enter a short key to be redirected as well, or enter an existing full url and receive it's existing short key.</p>
+<%= form_tag '/dealwith' do%>
+<div class="field">
+<%= label_tag "Make new shortened url"%>
+<%= text_field_tag :entry%>
+</div>
+<%= submit_tag "Enter"%>
+<%end%>
