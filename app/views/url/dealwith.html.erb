@@ -1,4 +1,4 @@
 
 <h1>Your short key is: <%= @rand%></h1>
-<p><%=link_to 'https://supurl.herokuapp.com/short/#{@rand}'%> will redirect you to the original full url.</p>
+<p><a href="https://supurl.herokuapp.com/short/ <%= @rand%>"></a>will redirect you to the original full url.</p>
 <%= link_to 'back', root_path%>
